@@ -24,3 +24,8 @@ Thumbs.db
 node_modules/
 __pycache__/
 *.pyc
+
+frames/
+frames-final/
+effects/
+logs/*.log
