@@ -1,0 +1,17 @@
+{
+  "salon-canli.mp4": {
+    "frames": 240,
+    "first_last_rgb_mae_255": 0.0,
+    "adjacent_rgb_mae_255": 0.4426591515896998
+  },
+  "salon-canli.webm": {
+    "frames": 240,
+    "first_last_rgb_mae_255": 0.0,
+    "adjacent_rgb_mae_255": 0.27496370524260894
+  },
+  "efekt-katmani.webm": {
+    "frames": 240,
+    "first_last_rgb_mae_255": 0.0,
+    "adjacent_rgb_mae_255": 0.1924155915853092
+  }
+}
