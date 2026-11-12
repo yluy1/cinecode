@@ -1,0 +1,4 @@
+mp4 h264 1920x1080 30fps 8s, no audio
+webm vp9 1920x1080 30fps 8s, no audio
+Grayscale RMS adjacent/seam/adjacent: 0.12602779614527332 0.12391115270802745 0.12080539268275473
+PASS: periodic endpoints byte-identical; seam step comparable to neighboring frame steps.

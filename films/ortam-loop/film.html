@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>Ortam loop</title><style>body{margin:0;background:#11100f}canvas{width:100%;display:block}</style><canvas id="c" width="1920" height="1080"></canvas><script>
+const c=document.getElementById('c'),g=c.getContext('2d'),TAU=2*Math.PI;
+function rect(x,y,w,h,color){g.fillStyle=color;g.fillRect(x,y,w,h)}
+function path(points,color){g.fillStyle=color;g.beginPath();points.forEach((p,i)=>i?g.lineTo(...p):g.moveTo(...p));g.closePath();g.fill()}
+function glow(x,y,r,a){let q=g.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,`rgba(217,159,88,${a})`);q.addColorStop(1,'rgba(217,159,88,0)');g.fillStyle=q;g.fillRect(x-r,y-r,2*r,2*r)}
+function chair(x,y,s){g.save();g.translate(x,y);g.scale(s,s);g.strokeStyle='#302821';g.lineWidth=3;g.beginPath();g.moveTo(-19,0);g.lineTo(-24,40);g.moveTo(19,0);g.lineTo(25,40);g.stroke();let q=g.createLinearGradient(-25,-30,30,0);q.addColorStop(0,'#322122');q.addColorStop(.45,'#4a292b');q.addColorStop(1,'#251b1c');g.fillStyle=q;g.beginPath();g.roundRect(-27,-42,54,43,10);g.fill();rect(-25,1,50,9,'#332123');g.restore()}
+window.renderFrame=function(frame){const p=TAU*((frame%240+240)%240)/240;rect(0,0,1920,1080,'#171514');let wall=g.createLinearGradient(0,220,0,800);wall.addColorStop(0,'#201d19');wall.addColorStop(.6,'#393027');wall.addColorStop(1,'#251f1b');rect(180,220,1560,600,wall);
+// Walnut acoustic paneling and inset mouldings.
+for(let i=0;i<15;i++){let x=200+i*102;rect(x,280,91,415,'#2b251f');rect(x+4,285,83,405,'#342b23');rect(x+10,295,71,385,'#2d261f');for(let k=0;k<9;k++){g.strokeStyle='rgba(111,79,49,.09)';g.beginPath();g.moveTo(x+15+k*7,304);g.bezierCurveTo(x+8+k*7,410,x+25+k*7,530,x+15+k*7,672);g.stroke()}}
+rect(185,692,1550,9,'#493a2b');rect(185,703,1550,8,'#211c18');path([[180,715],[1740,715],[1920,1040],[0,1040]],'#352b23');for(let i=0;i<35;i++){g.strokeStyle='rgba(143,107,67,.13)';g.beginPath();g.moveTo(960+(i-17)*35,715);g.lineTo(960+(i-17)*110,1040);g.stroke()}for(let y=735;y<1030;y+=32){rect(100,y,1720,1,'rgba(13,12,11,.25)')}
+// Empty rehearsal seating and music stands, in shallow semicircles.
+for(let row=0;row<3;row++)for(let j=0;j<7;j++){let x=470+j*155+(row%2)*32,y=690+row*65+Math.abs(j-3)*9;chair(x,y,.65+row*.13);if(row<2){g.strokeStyle='#24221e';g.lineWidth=3;g.beginPath();g.moveTo(x+45,y-36);g.lineTo(x+45,y+30);g.lineTo(x+29,y+38);g.moveTo(x+45,y+30);g.lineTo(x+61,y+38);g.stroke();path([[x+18,y-71],[x+76,y-68],[x+71,y-37],[x+20,y-39]],'#24231f');rect(x+24,y-67,42,1,'#5a4b37')}}
+// Two warm, aged brass sconces.
+for(const [i,x] of [350,1570].entries()){let y=445,a=.17+.012*Math.sin(p*3+i)+.008*Math.sin(p*7+i);glow(x,y,210,a);rect(x-5,y+30,10,65,'#776044');rect(x-23,y+69,46,7,'#5b4a34');path([[x-25,y-35],[x+25,y-35],[x+19,y+30],[x-19,y+30]],'#806849');rect(x-16,y-29,32,53,'#ad8a57');glow(x,y,48,.30);g.fillStyle='#d1b278';g.beginPath();g.ellipse(x,y,5+Math.sin(p*3+i)*.5,15,0,0,TAU);g.fill();rect(x-31,y-40,62,6,'#66523b')}
+// Soft cones begin below the quiet dashboard header.
+g.save();g.filter='blur(23px)';for(let i=0;i<2;i++){let q=g.createLinearGradient(400+i*150,240,1000+i*300,850);q.addColorStop(0,'rgba(211,185,135,.015)');q.addColorStop(.5,'rgba(211,185,135,.065)');q.addColorStop(1,'rgba(211,185,135,0)');path([[380+i*155,235],[430+i*155,235],[1320+i*230,880],[730+i*200,880]],q)}g.restore();
+// Seeded particles follow closed ellipses. No reset or random per-frame noise.
+for(let i=0;i<150;i++){let r=((i*7919)%997)/997,s=((i*3571)%991)/991,x=520+r*850+12*Math.sin(p+i),y=310+s*490+9*Math.cos(p+i*.7);g.fillStyle=`rgba(205,181,143,${.08+.12*s})`;g.beginPath();g.arc(x,y,.5+(i%3)*.35,0,TAU);g.fill()}
+g.save();g.filter='blur(38px)';for(let i=0;i<4;i++)glow(600+i*240+22*Math.sin(p+i),780+12*Math.cos(p+i),230,.017);g.restore();
+// Heavy velvet, narrow moving hem and sculpted folds.
+for(let side=0;side<2;side++){g.save();if(side){g.translate(1920,0);g.scale(-1,1)}let sway=3*Math.sin(p+side*.6);for(let k=0;k<12;k++){let x=k*20;let q=g.createLinearGradient(x,0,x+26,0);q.addColorStop(0,'#201416');q.addColorStop(.45,'#46242a');q.addColorStop(.75,'#342024');q.addColorStop(1,'#211719');path([[x,200],[x+27,200],[x+26+sway*(k/12),930-k*3],[x+sway*(k/12),936-k*3]],q)}g.restore()}
+// Foreground audience silhouettes.
+for(let row=0;row<2;row++)for(let j=0;j<12;j++){g.save();g.globalAlpha=.90;chair(-50+j*180+row*80,1010+row*115,2.15);g.restore()}
+let shade=g.createLinearGradient(0,130,0,330);shade.addColorStop(0,'#141312');shade.addColorStop(1,'rgba(20,19,18,0)');rect(0,0,1920,330,shade);let v=g.createRadialGradient(960,620,350,960,560,1200);v.addColorStop(0,'rgba(10,9,9,0)');v.addColorStop(1,'rgba(10,9,9,.58)');rect(0,0,1920,1080,v);
+};window.captureFrame=(i)=>{renderFrame(i);return c.toDataURL('image/png')};window.READY=Promise.resolve({frames:new URLSearchParams(location.search).has("verifyLoop")?242:240,fps:30,width:1920,height:1080,renderer:'canvas2d',title:'Ortam loop'});renderFrame(0);
+</script>
